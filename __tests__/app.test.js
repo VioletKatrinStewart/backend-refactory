@@ -31,7 +31,7 @@ describe('refactory routes', () => {
     pool.end();
   });
 
-  it.only('should be able to create an order', async () => {
+  it('should be able to create an order', async () => {
     const res = await request(app)
       .post('/api/v1/orders')
       .send({ product: 'Widget', quantity: 1 });
@@ -43,7 +43,7 @@ describe('refactory routes', () => {
     });
   });
 
-  it('should be able to list an order by id', async () => {
+  it.only('should be able to list an order by id', async () => {
     const order = await createOrder({ product: 'Widget', quantity: 1 });
     const res = await request(app).get(`/api/v1/orders/${order.id}`);
 
