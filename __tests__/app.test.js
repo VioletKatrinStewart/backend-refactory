@@ -14,13 +14,13 @@ const Order = require('../lib/models/Order');
 // }
 
 // TODO: Remove this function & use the Order model
-async function getOrderById(id) {
-  const { rows } = await pool.query('SELECT * FROM orders WHERE id=$1;', [id]);
+// async function getOrderById(id) {
+//   const { rows } = await pool.query('SELECT * FROM orders WHERE id=$1;', [id]);
 
-  if (!rows[0]) return null;
+//   if (!rows[0]) return null;
 
-  return new Order(rows[0]);
-}
+//   return new Order(rows[0]);
+// }
 
 describe('refactory routes', () => {
   beforeEach(() => {
@@ -43,7 +43,7 @@ describe('refactory routes', () => {
     });
   });
 
-  it.only('should be able to list an order by id', async () => {
+  it('should be able to list an order by id', async () => {
     const order = await createOrder({ product: 'Widget', quantity: 1 });
     const res = await request(app).get(`/api/v1/orders/${order.id}`);
 
