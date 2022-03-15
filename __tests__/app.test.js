@@ -5,25 +5,22 @@ const app = require('../lib/app');
 const Order = require('../lib/models/Order');
 
 // TODO: Remove this function & use the Order model
-async function createOrder({ product, quantity }) {
-  const { rows } = await pool.query(
-    'INSERT INTO orders(product, quantity) VALUES ($1, $2) RETURNING *;',
-    [product, quantity]
-  );
-  return new Order(rows[0]);
-}
+// async function createOrder({ product, quantity }) {
+//   const { rows } = await pool.query(
+//     'INSERT INTO orders(product, quantity) VALUES ($1, $2) RETURNING *;',
+//     [product, quantity]
+//   );
+//   return new Order(rows[0]);
+// }
 
 // TODO: Remove this function & use the Order model
-async function getOrderById(id) {
-  const { rows } = await pool.query(
-    'SELECT * FROM orders WHERE id=$1;',
-    [id]
-  );
+// async function getOrderById(id) {
+//   const { rows } = await pool.query('SELECT * FROM orders WHERE id=$1;', [id]);
 
-  if (!rows[0]) return null;
+//   if (!rows[0]) return null;
 
-  return new Order(rows[0]);
-}
+//   return new Order(rows[0]);
+// }
 
 describe('refactory routes', () => {
   beforeEach(() => {
@@ -38,7 +35,7 @@ describe('refactory routes', () => {
     const res = await request(app)
       .post('/api/v1/orders')
       .send({ product: 'Widget', quantity: 1 });
-
+    console.log('RES', res);
     expect(res.body).toEqual({
       id: expect.any(String),
       product: 'Widget',
